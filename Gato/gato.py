@@ -2,9 +2,9 @@ from turtle import pos
 
 
 def reinicio():
-    estructura = [['x','o','x'],
-                  ['x','x','x'],
-                  ['o','x','o']]
+    estructura = [['','',''],
+                  ['','',''],
+                  ['','','']]
     return estructura
 
 
@@ -40,25 +40,41 @@ def diagonal(simbolo, estructura):
     if estructura[1][1] != simbolo:
         pass
     else:
+        if estructura[2][0] == simbolo:
+            pos_diagonal[1] = pos_diagonal[1] + 1
+        if estructura[1][1] == simbolo:
+            pos_diagonal[1] = pos_diagonal[1] + 1
+        if estructura[0][2] == simbolo:
+            pos_diagonal[1] = pos_diagonal[1] + 1
+
         for i in range(3):
             for j in range(3):
                 if i == j and estructura[i][j] == simbolo:
-                    pos_diagonal[i] = pos_diagonal[i] + 1
-                    
-    print(pos_diagonal)
+                    pos_diagonal[0] = pos_diagonal[0] + 1
+        
+        if pos_diagonal[0] == 3 or pos_diagonal[1] == 3:
+            return True
 
 def validar_x(estructura, gano_x):
     gano_x = horizontal('x', estructura)
     gano_x = vertical('x', estructura)
-    diagonal('x', estructura)
+    gano_x = diagonal('x', estructura)
     return gano_x
 
+
+def validar_o(estructura, gano_o):
+    gano_o = horizontal('o', estructura)
+    gano_o = vertical('o', estructura)
+    gano_o = diagonal('o', estructura)
+    return gano_o
 
 def run():
     estructura = []
     x = bool
+    o = bool
     estructura = reinicio()
     x = validar_x(estructura, x)
+    o = validar_o(estructura, o)
     print(x)
 
 
