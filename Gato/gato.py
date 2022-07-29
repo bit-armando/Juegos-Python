@@ -1,8 +1,5 @@
-from turtle import pos
-
-
 def reinicio():
-    estructura = [['','',''],
+    estructura = [['o','o','o'],
                   ['','',''],
                   ['','','']]
     return estructura
@@ -15,12 +12,17 @@ def imprimir(estructura):
         print()
 
 
+def jugar(estructura, i, j, simbolo):
+    estructura[i][j] = simbolo
+    return estructura
+
 def horizontal(simbolo, estructura):  
     pos_horizontal = [0, 0, 0]
     for i in range(3):
         for j in range(3):
             if estructura[i][j] == simbolo:
                 pos_horizontal[i] = pos_horizontal[i] + 1
+
         if pos_horizontal[i] == 3:
             return True
 
@@ -57,25 +59,31 @@ def diagonal(simbolo, estructura):
 
 def validar_x(estructura, gano_x):
     gano_x = horizontal('x', estructura)
-    gano_x = vertical('x', estructura)
-    gano_x = diagonal('x', estructura)
+    #gano_x = vertical('x', estructura)
+    #gano_x = diagonal('x', estructura)
     return gano_x
 
 
 def validar_o(estructura, gano_o):
     gano_o = horizontal('o', estructura)
-    gano_o = vertical('o', estructura)
-    gano_o = diagonal('o', estructura)
+    #gano_o = vertical('o', estructura)
+    #gano_o = diagonal('o', estructura)
     return gano_o
+
 
 def run():
     estructura = []
-    x = bool
-    o = bool
+    x = None
+    o = None
     estructura = reinicio()
+    
     x = validar_x(estructura, x)
     o = validar_o(estructura, o)
-    print(x)
+    
+    if x:
+        print('Gano X')
+    elif o:
+        print('Gano O')
 
 
 if __name__ == '__main__':
