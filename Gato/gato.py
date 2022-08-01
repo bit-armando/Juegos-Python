@@ -1,3 +1,6 @@
+from webbrowser import Galeon
+
+
 def reinicio():
     estructura = [['','',''],
                   ['','',''],
@@ -12,9 +15,13 @@ def imprimir(estructura):
         print()
 
 
-def jugar(estructura, i, j, simbolo):
-    estructura[i][j] = simbolo
-    return 
+def jugar(estructura, simbolo):
+    cordenada = input("Teclea las cordenadas de " + simbolo + " (Separadas por coma): ")
+    i = int(cordenada[0])
+    j = int(cordenada[2])
+    if estructura[i][j] == '':
+        estructura[i][j] = simbolo
+    return estructura
     
 
 def horizontal(simbolo, estructura):  
@@ -58,39 +65,43 @@ def diagonal(simbolo, estructura):
         if pos_diagonal[0] == 3 or pos_diagonal[1] == 3:
             return True
 
-def validar_x(estructura, gano_x):
-    gano_x = horizontal('x', estructura)
-    if gano_x:
-        return gano_x
-    gano_x = vertical('x', estructura)
-    if gano_x:
-        return gano_x
-    gano_x = diagonal('x', estructura)
-    if gano_x:
-        return gano_x
 
-
-def validar_o(estructura, gano_o):
-    gano_o = horizontal('o', estructura)
-    if gano_o:
-        return gano_o
-    gano_o = vertical('o', estructura)
-    if gano_o:
-        return gano_o
-    gano_o = diagonal('o', estructura)
-    if gano_o:
-        return gano_o
+def validar(estructura, simbolo, gano):
+    gano = horizontal(simbolo, estructura)
+    if gano:
+        return gano
+    gano = vertical(simbolo, estructura)
+    if gano:
+        return gano
+    gano = diagonal(simbolo, estructura)
+    if gano:
+        return gano
 
 
 def run():
     estructura = []
+    estructura = reinicio()
     x = None
     o = None
-    estructura = reinicio()
+    bandera = True
+    turno = True
     
-    x = validar_x(estructura, x)
-    o = validar_o(estructura, o)
-
+    while o == None and x == None:
+        if turno:
+            estructura =jugar(estructura, 'o')
+            imprimir(estructura)
+            turno = False
+            o = validar(estructura, 'o', o)
+        else:
+            estructura = jugar(estructura, 'x')
+            imprimir(estructura)
+            turno = True
+            x = validar(estructura, 'x', x)
+    
+    if x:
+        print('Gano X')
+    else:
+        print('Gano O')
 
 if __name__ == '__main__':
     run()
