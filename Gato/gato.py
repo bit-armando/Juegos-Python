@@ -1,5 +1,5 @@
 def reinicio():
-    estructura = [['o','o','o'],
+    estructura = [['','',''],
                   ['','',''],
                   ['','','']]
     return estructura
@@ -14,7 +14,8 @@ def imprimir(estructura):
 
 def jugar(estructura, i, j, simbolo):
     estructura[i][j] = simbolo
-    return estructura
+    return 
+    
 
 def horizontal(simbolo, estructura):  
     pos_horizontal = [0, 0, 0]
@@ -59,16 +60,26 @@ def diagonal(simbolo, estructura):
 
 def validar_x(estructura, gano_x):
     gano_x = horizontal('x', estructura)
-    #gano_x = vertical('x', estructura)
-    #gano_x = diagonal('x', estructura)
-    return gano_x
+    if gano_x:
+        return gano_x
+    gano_x = vertical('x', estructura)
+    if gano_x:
+        return gano_x
+    gano_x = diagonal('x', estructura)
+    if gano_x:
+        return gano_x
 
 
 def validar_o(estructura, gano_o):
     gano_o = horizontal('o', estructura)
-    #gano_o = vertical('o', estructura)
-    #gano_o = diagonal('o', estructura)
-    return gano_o
+    if gano_o:
+        return gano_o
+    gano_o = vertical('o', estructura)
+    if gano_o:
+        return gano_o
+    gano_o = diagonal('o', estructura)
+    if gano_o:
+        return gano_o
 
 
 def run():
@@ -79,11 +90,6 @@ def run():
     
     x = validar_x(estructura, x)
     o = validar_o(estructura, o)
-    
-    if x:
-        print('Gano X')
-    elif o:
-        print('Gano O')
 
 
 if __name__ == '__main__':
