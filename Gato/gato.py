@@ -1,6 +1,3 @@
-from webbrowser import Galeon
-
-
 def reinicio():
     estructura = [['','',''],
                   ['','',''],

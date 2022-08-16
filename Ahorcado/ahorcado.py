@@ -4,7 +4,7 @@ import dibujos
 
 
 def read_file():
-    with open("./final_proyects/data.txt", 'r',encoding='utf-8') as f:
+    with open("./Ahorcado/data.txt", 'r',encoding='utf-8') as f:
         datos = [line for line in f]
     palabra = datos[randint(0, len(datos)) - 1]
     return palabra
